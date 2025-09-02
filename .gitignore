@@ -1,4 +1,3 @@
-client
-server
 include/libft/*
 obj/*
+pipex
