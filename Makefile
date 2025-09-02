@@ -6,7 +6,7 @@
 #    By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/31 16:09:59 by jcesar-s          #+#    #+#              #
-#    Updated: 2025/09/02 15:52:30 by jcesar-s         ###   ########.fr        #
+#    Updated: 2025/09/02 17:31:23 by jcesar-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ LFT = $(LFTDIR)libft.a
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LFT)
+$(NAME): $(LFT) $(OBJ) 
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LFT)
 
 $(ODIR)%.o: $(SDIR)%.c $(DEP)
