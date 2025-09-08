@@ -6,7 +6,7 @@
 /*   By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 09:59:40 by jcesar-s          #+#    #+#             */
-/*   Updated: 2025/09/08 19:27:41 by jcesar-s         ###   ########.fr       */
+/*   Updated: 2025/09/08 19:56:58 by jcesar-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ char	*get_program_path(char *name, t_error *status, char **split_env)
 	char		*tmp;
 	int			i;
 
+	if (access(name, F_OK) == 0)
+		return (ft_strdup(name));
 	if (!name || !split_env || !status)
 		return (handle_error(NULL, status, ALLOC_ERR));
 	tmp = ft_strjoin("/", name);
@@ -59,14 +61,13 @@ char	*get_program_path(char *name, t_error *status, char **split_env)
 		if (!program_path)
 			return (handle_error(tmp, status, ALLOC_ERR));
 		if (access(program_path, F_OK) == 0)
-			break ;
+		{
+			handle_error(tmp, status, SUCCESS);
+			return (program_path);
+		}
 		free(program_path);
-		program_path = NULL;
 	}
-	if (!program_path)
-		return (handle_error(tmp, status, NOT_FOUND));
-	handle_error(tmp, status, SUCCESS);
-	return (program_path);
+	return (handle_error(tmp, status, NOT_FOUND));
 }
 
 static

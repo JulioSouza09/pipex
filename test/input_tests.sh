@@ -8,3 +8,4 @@ valgrind ./pipex src/main.c "lssdfs -a " "wc -l" include/pipex.h
 valgrind ./pipex src/main.c "ls -l -t -p -m" "vim" outfile
 valgrind ./pipex src/main.c "ls -l -t -p -m" "" outfile > outfile
 valgrind ./pipex src/main.c "ls -l -t -p -m" "              " outfile > outfile
+valgrind ./pipex src/main.c "/usr/bin/ls" "/usr/bin/wc" outfile
