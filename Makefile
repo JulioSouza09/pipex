@@ -6,7 +6,7 @@
 #    By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/31 16:09:59 by jcesar-s          #+#    #+#              #
-#    Updated: 2025/09/02 17:31:23 by jcesar-s         ###   ########.fr        #
+#    Updated: 2025/09/08 09:35:53 by jcesar-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ IDIR = include/
 ODIR = obj/
 SDIR = src/
 LFTDIR = $(IDIR)libft/
-SRCFILES = main.c
+SRCFILES = main.c files_checker.c utils.c
 SRC = $(patsubst %, $(SDIR)%, $(SRCFILES))
 OBJ = $(patsubst %.c, $(ODIR)%.o, $(SRCFILES))
 DEP = $(IDIR)pipex.h

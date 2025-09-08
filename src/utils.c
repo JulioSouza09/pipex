@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/02 15:42:22 by jcesar-s          #+#    #+#             */
-/*   Updated: 2025/09/08 10:44:56 by jcesar-s         ###   ########.fr       */
+/*   Created: 2025/09/08 09:35:28 by jcesar-s          #+#    #+#             */
+/*   Updated: 2025/09/08 09:36:14 by jcesar-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	main(int argc, char **argv, char **envp)
+void	free_matrix(char **matrix)
 {
-	if (argc != 5)
-	{
-		ft_printf_err("Usage: %s file1 cmd1 cmd2 file2\n", argv[1]);
-		return (1);
-	}
-	(void)envp;
-	return (0);
+	int i;
+
+	i = 0;
+	while (matrix[i])
+		free(matrix[i++]);
+	free(matrix[i]);
+	free(matrix);
 }

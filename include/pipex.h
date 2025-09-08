@@ -6,14 +6,13 @@
 /*   By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 17:27:33 by jcesar-s          #+#    #+#             */
-/*   Updated: 2025/09/03 09:33:16 by jcesar-s         ###   ########.fr       */
+/*   Updated: 2025/09/08 10:22:52 by jcesar-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 
 # define PIPEX_H
-# define INCLUDE_TEST "Including '.h' files is also working properly\n"
 
 # include <stdio.h>
 # include <string.h>
@@ -21,6 +20,29 @@
 # include <unistd.h>
 # include "libft.h"
 
-void	test_including_file(void);
+typedef enum e_error
+{
+	SUCCESS = 1,
+	ALLOC_ERR = -1,
+	NOT_FOUND = 0
+}	t_error;
+
+typedef struct s_pipex
+{
+	int		fd1;
+	int		fd2;
+	char	**cmd1;
+	char	**cmd2;
+	char	**envp;
+}	t_pipex;
+
+/***** Files checker *****/
+int	check_files(char *pathname, int access_flags, int open_flags);
+
+/***** Command checker *****/
+char	**get_cmd(char *cmd, char **envp, t_error *status);
+
+/***** Utils *****/
+void	free_matrix(char **matrix);
 
 #endif
