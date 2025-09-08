@@ -6,7 +6,7 @@
 /*   By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 17:27:33 by jcesar-s          #+#    #+#             */
-/*   Updated: 2025/09/08 10:22:52 by jcesar-s         ###   ########.fr       */
+/*   Updated: 2025/09/08 13:50:54 by jcesar-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 
 typedef enum e_error
 {
-	SUCCESS = 1,
+	SUCCESS = 0,
 	ALLOC_ERR = -1,
-	NOT_FOUND = 0
+	NOT_FOUND = 1
 }	t_error;
 
 typedef struct s_pipex
@@ -36,13 +36,15 @@ typedef struct s_pipex
 	char	**envp;
 }	t_pipex;
 
-/***** Files checker *****/
-int	check_files(char *pathname, int access_flags, int open_flags);
-
 /***** Command checker *****/
-char	**get_cmd(char *cmd, char **envp, t_error *status);
+char	**get_cmd(char *cmd, t_error *status, char **envp);
 
 /***** Utils *****/
 void	free_matrix(char **matrix);
+int		open_correctly(t_pipex *pipex, char *pathname, int flags, mode_t mode);
+
+/***** Pipex init *****/
+t_pipex	*pipex_init(char **argv, char **envp);
+void	pipex_destroy(t_pipex *pipex);
 
 #endif

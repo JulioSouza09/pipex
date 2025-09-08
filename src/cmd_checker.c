@@ -6,7 +6,7 @@
 /*   By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 09:59:40 by jcesar-s          #+#    #+#             */
-/*   Updated: 2025/09/08 10:20:55 by jcesar-s         ###   ########.fr       */
+/*   Updated: 2025/09/08 12:30:17 by jcesar-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,27 +69,43 @@ char	*get_program_path(char *name, t_error *status, char **split_env)
 	return (program_path);
 }
 
-char	**get_cmd(char *cmd, char **envp, t_error *status)
+static
+int	check_status(char *full_path, char **cmd_name, t_error *status)
 {
-	char	**result;
-	char	*path_env;
-	char	*program_path;
+	if (!full_path && *status == ALLOC_ERR)
+	{
+		ft_printf_err("An error occured\n");
+		free_matrix(cmd_name);
+		return (*status);
+	}
+	else if (!full_path && *status == NOT_FOUND)
+	{
+		ft_printf_err("pipex: command not found: %s\n", cmd_name[0]);
+		free_matrix(cmd_name);
+		return (*status);
+	}
+	return (0);
+}
+
+char	**get_cmd(char *cmd, t_error *status, char **envp)
+{
+	char	*full_path;
+	char	**cmd_name;
+	char	**path_env;
 
 	if (!cmd || !envp || !status)
 		return (NULL);
-	path_env = get_path_env(envp);
+	cmd_name = ft_split(cmd, ' ');
+	if (!cmd_name)
+		return (NULL);
+	path_env = ft_split(get_path_env(envp), ':');
 	if (!path_env)
+		return (free_matrix(cmd_name), NULL);
+	full_path = get_program_path(cmd_name[0], status, path_env);
+	free_matrix(path_env);
+	if (check_status(full_path, cmd_name, status))
 		return (NULL);
-	result = ft_split(cmd, ' ');
-	if (!result)
-		return (NULL);
-	program_path = get_program_path(result[0], status, result);
-	if (!program_path)
-	{
-		free_matrix(result);
-		return (NULL);
-	}
-	free(result[0]);
-	result[0] = program_path;
-	return (result);
+	free(cmd_name[0]);
+	cmd_name[0] = full_path;
+	return (cmd_name);
 }
