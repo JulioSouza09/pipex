@@ -6,7 +6,7 @@
 #    By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/31 16:09:59 by jcesar-s          #+#    #+#              #
-#    Updated: 2025/09/08 13:51:11 by jcesar-s         ###   ########.fr        #
+#    Updated: 2025/09/08 19:24:27 by jcesar-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,17 +37,17 @@ $(LFT):
 		git clone git@github.com:JulioSouza09/libft.git $(LFTDIR); \
 		rm -rf $(LFTDIR).git; \
 	fi
-	make -C $(LFTDIR)
+	@make -C $(LFTDIR) --no-print-directory
 
 libclean:
 	rm -rf $(LFTDIR)
 
 clean:
-	make clean -C $(LFTDIR)
+	@make clean -C $(LFTDIR) --no-print-directory
 	rm -rf $(ODIR)
 
 fclean: clean
-	make fclean -C $(LFTDIR)
+	@make fclean -C $(LFTDIR) --no-print-directory
 	rm -f $(NAME)
 
 re: fclean all
