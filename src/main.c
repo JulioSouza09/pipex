@@ -6,11 +6,12 @@
 /*   By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:42:22 by jcesar-s          #+#    #+#             */
-/*   Updated: 2025/09/08 16:58:42 by jcesar-s         ###   ########.fr       */
+/*   Updated: 2025/09/09 18:43:18 by jcesar-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include <sys/wait.h>
 
 void	print_matrix(char *outer_text, char **matrix)
 {
@@ -35,10 +36,29 @@ int	main(int argc, char **argv, char **envp)
 	pipex = pipex_init(argv, envp);
 	if (!pipex)
 		return (2);
-	ft_printf("getting input from %s...\n", argv[1]);
-	print_matrix("executing command ", pipex->cmd1);
-	print_matrix("sending output to ", pipex->cmd2);
-	ft_printf("writing final output to %s...\n", argv[4]);
+	print_matrix("Test", pipex->cmd1);
+	int	fds[2];
+	int	pid;
+
+	pipe(fds);
+	pid = fork();
+	if (pid == 0)
+	{
+		dup2(pipex->fd1, STDIN_FILENO);
+		dup2(fds[1], STDOUT_FILENO);
+		close(fds[0]);
+		close(fds[1]);
+		execve(*pipex->cmd1, pipex->cmd1, envp);
+	}
+	else
+	{
+		dup2(pipex->fd2, STDOUT_FILENO);
+		dup2(fds[0], STDIN_FILENO);
+		close(fds[0]);
+		close(fds[1]);
+		execve(*pipex->cmd2, pipex->cmd2, envp);
+		wait(NULL);
+	}
 	pipex_destroy(pipex);
 	return (0);
 }
