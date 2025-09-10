@@ -6,7 +6,7 @@
 /*   By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:42:22 by jcesar-s          #+#    #+#             */
-/*   Updated: 2025/09/09 20:04:39 by jcesar-s         ###   ########.fr       */
+/*   Updated: 2025/09/10 11:11:47 by jcesar-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,29 +24,48 @@ void	print_matrix(char *outer_text, char **matrix)
 	ft_printf("...\n");
 }
 
+void	exit_on_error(t_pipex *pipex)
+{
+	perror("pipex");
+	pipex_destroy(pipex);
+	exit(3);
+
+}
+
 void	handle_pipes(t_pipex *pipex)
 {
 	int	fds[2];
 	int	pid;
 
-	pipe(fds);
+	if (pipe(fds) == -1)
+		exit_on_error(pipex);
 	pid = fork();
+	if (pid == -1)
+		exit_on_error(pipex);
 	if (pid == 0)
 	{
-		dup2(pipex->fd1, STDIN_FILENO);
-		dup2(fds[1], STDOUT_FILENO);
+		if (dup2(pipex->fd1, STDIN_FILENO) == -1)
+			exit_on_error(pipex);
+		close(pipex->fd1);
+		if (dup2(fds[1], STDOUT_FILENO) == -1)
+			exit_on_error(pipex);
 		close(fds[0]);
 		close(fds[1]);
 		execve(*pipex->cmd1, pipex->cmd1, pipex->envp);
+		perror("pipex");
 	}
 	else
 	{
-		dup2(pipex->fd2, STDOUT_FILENO);
-		dup2(fds[0], STDIN_FILENO);
+		if (dup2(pipex->fd2, STDOUT_FILENO) == -1)
+			exit_on_error(pipex);
+		close(pipex->fd2);
+		if (dup2(fds[0], STDIN_FILENO) == -1)
+			exit_on_error(pipex);
 		close(fds[0]);
 		close(fds[1]);
-		execve(*pipex->cmd2, pipex->cmd2, pipex->envp);
 		wait(NULL);
+		execve(*pipex->cmd2, pipex->cmd2, pipex->envp);
+		perror("pipex");
 	}
 }
 
