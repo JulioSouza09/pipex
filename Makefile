@@ -6,7 +6,7 @@
 #    By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/31 16:09:59 by jcesar-s          #+#    #+#              #
-#    Updated: 2025/09/12 11:50:04 by jcesar-s         ###   ########.fr        #
+#    Updated: 2025/09/12 19:11:57 by jcesar-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,13 +43,13 @@ libclean:
 	rm -rf $(LFTDIR)
 
 clean:
-	#@make clean -C $(LFTDIR) --no-print-directory
+	@make clean -C $(LFTDIR) --no-print-directory
 	rm -rf $(ODIR)
 
 fclean: clean
-	#@make fclean -C $(LFTDIR) --no-print-directory
+	@make fclean -C $(LFTDIR) --no-print-directory
 	rm -f $(NAME)
 
 re: fclean all
 
-#.PHONY: all clean fclean re
+.PHONY: all clean fclean re
