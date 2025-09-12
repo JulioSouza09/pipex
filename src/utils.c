@@ -6,7 +6,7 @@
 /*   By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 09:35:28 by jcesar-s          #+#    #+#             */
-/*   Updated: 2025/09/08 19:27:11 by jcesar-s         ###   ########.fr       */
+/*   Updated: 2025/09/11 15:54:22 by jcesar-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,12 @@ int	open_correctly(t_pipex *pipex, char *pathname, int flags, mode_t mode)
 		exit(errno);
 	}
 	return (fd);
+}
+
+void	exit_on_error(t_pipex *pipex)
+{
+	perror("pipex");
+	pipex_destroy(pipex);
+	exit(3);
+
 }
