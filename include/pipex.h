@@ -6,7 +6,7 @@
 /*   By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 17:27:33 by jcesar-s          #+#    #+#             */
-/*   Updated: 2025/09/12 11:20:46 by jcesar-s         ###   ########.fr       */
+/*   Updated: 2025/09/12 11:53:25 by jcesar-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ t_pipex	*pipex_init(char **argv, char **envp);
 void	pipex_destroy(t_pipex *pipex);
 
 /***** Pipes *****/
-void	exec_pipe(t_pipex *pipex);
+int	exec_pipe(t_pipex *pipex);
 
 #endif

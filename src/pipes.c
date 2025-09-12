@@ -6,7 +6,7 @@
 /*   By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 15:48:44 by jcesar-s          #+#    #+#             */
-/*   Updated: 2025/09/11 15:54:45 by jcesar-s         ###   ########.fr       */
+/*   Updated: 2025/09/12 16:47:04 by jcesar-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	exec_child2(t_pipex *pipex, int *pipefd)
 	perror("pipex");
 }
 
-void	exec_pipe(t_pipex *pipex)
+int	exec_pipe(t_pipex *pipex)
 {
 	int	pipefd[2];
 	int	status;
@@ -53,18 +53,15 @@ void	exec_pipe(t_pipex *pipex)
 	if (pid1 == -1)
 		exit_on_error(pipex);
 	if (pid1 == 0)
-	{
 		exec_child1(pipex, pipefd);
-	}
 	pid2 = fork();
 	if (pid2 == -1)
 		exit_on_error(pipex);
 	if (pid2 == 0)
-	{
 		exec_child2(pipex, pipefd);
-	}
 	close(pipefd[0]);
 	close(pipefd[1]);
 	waitpid(pid1, &status, 0);
 	waitpid(pid2, &status, 0);
+	return (WEXITSTATUS(status));
 }
