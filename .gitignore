@@ -2,3 +2,4 @@ include/libft/*
 obj/*
 pipex
 outfile
+pipex_bonus

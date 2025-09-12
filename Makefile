@@ -6,7 +6,7 @@
 #    By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/31 16:09:59 by jcesar-s          #+#    #+#              #
-#    Updated: 2025/09/12 19:11:57 by jcesar-s         ###   ########.fr        #
+#    Updated: 2025/09/12 19:25:46 by jcesar-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,12 @@ SRC = $(patsubst %, $(SDIR)%, $(SRCFILES))
 OBJ = $(patsubst %.c, $(ODIR)%.o, $(SRCFILES))
 DEP = $(IDIR)pipex.h
 LFT = $(LFTDIR)libft.a
+
+BNAME = pipex_bonus
+BSDIR = $(SDIR)bonus/
+BSRCFILES = main_bonus.c cmd_checker_bonus.c pipex_init_bonus.c utils_bonus.c pipes_bonus.c
+BSRC = $(patsubst %, $(BSDIR)%, $(BSRCFILES))
+BOBJ = $(patsubst %.c, $(ODIR)%.o, $(BSRCFILES))
 
 all: $(NAME)
 
@@ -49,7 +55,17 @@ clean:
 fclean: clean
 	@make fclean -C $(LFTDIR) --no-print-directory
 	rm -f $(NAME)
+	rm -f $(BNAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+bonus: $(BNAME) $(BOBJ)
+
+$(BNAME): $(LFT) $(BOBJ) 
+	$(CC) $(CFLAGS) $(BOBJ) -o $(BNAME) $(LFT)
+
+$(ODIR)%.o: $(BSDIR)%.c $(DEP)
+	mkdir -p $(ODIR)
+	$(CC) $(CFLAGS) -c $< -o $@ -I $(IDIR) -I $(LFTDIR)
+
+.PHONY: all clean fclean re bonus
