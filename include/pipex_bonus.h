@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 17:27:33 by jcesar-s          #+#    #+#             */
-/*   Updated: 2025/09/13 14:51:07 by jcesar-s         ###   ########.fr       */
+/*   Updated: 2025/09/13 22:16:23 by jcesar-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,11 @@ typedef struct s_pipex
 {
 	int		fd1;
 	int		fd2;
-	char	**cmd1;
-	char	**cmd2;
+	int		cmd_count;
+	int		*pids;
+	int		**pipefd;
+	char	**argv;
+	char	**cmd;
 	char	**envp;
 }	t_pipex;
 
@@ -46,10 +49,17 @@ void	exit_on_error(t_pipex *pipex);
 int		open_correctly(t_pipex *pipex, char *pathname, int flags, mode_t mode);
 
 /***** Pipex init *****/
-t_pipex	*pipex_init(char **argv, char **envp);
+t_pipex	*pipex_init(int argc, char **argv, char **envp);
 void	pipex_destroy(t_pipex *pipex);
 
 /***** Pipes *****/
-int	exec_pipe(t_pipex *pipex);
+void 	close_unused_pipes(t_pipex *pipex, int needed_read, int needed_write);
+int		exec_pipe(t_pipex *pipex, int r_from, int w_to, int index);
+int		exec_pipe_chain(t_pipex *pipex);
+
+/***** Create pipes *****/
+int		**create_all_pipes(t_pipex *pipex);
+int		*create_pids(t_pipex *pipex);
+void	destroy_pipes(int **to_free, int position);
 
 #endif

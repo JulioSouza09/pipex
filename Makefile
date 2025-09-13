@@ -6,7 +6,7 @@
 #    By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/31 16:09:59 by jcesar-s          #+#    #+#              #
-#    Updated: 2025/09/12 19:25:46 by jcesar-s         ###   ########.fr        #
+#    Updated: 2025/09/13 15:23:15 by jcesar-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ LFT = $(LFTDIR)libft.a
 
 BNAME = pipex_bonus
 BSDIR = $(SDIR)bonus/
-BSRCFILES = main_bonus.c cmd_checker_bonus.c pipex_init_bonus.c utils_bonus.c pipes_bonus.c
+BSRCFILES = main_bonus.c cmd_checker_bonus.c pipex_init_bonus.c \
+			utils_bonus.c pipes_bonus.c create_pipes_bonus.c
 BSRC = $(patsubst %, $(BSDIR)%, $(BSRCFILES))
 BOBJ = $(patsubst %.c, $(ODIR)%.o, $(BSRCFILES))
 

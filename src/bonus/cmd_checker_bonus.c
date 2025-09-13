@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_checker.c                                      :+:      :+:    :+:   */
+/*   cmd_checker_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 09:59:40 by jcesar-s          #+#    #+#             */
-/*   Updated: 2025/09/09 12:08:45 by jcesar-s         ###   ########.fr       */
+/*   Updated: 2025/09/12 19:29:24 by jcesar-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 static
 char	*get_path_env(char **envp)
@@ -71,25 +71,6 @@ char	*get_program_path(char *name, char **split_env)
 	}
 	return (handle_error(tmp, name, NOT_FOUND));
 }
-
-/*
-int	check_status(char *full_path, char **cmd_name)
-{
-	if (!full_path && *status == ALLOC_ERR)
-	{
-		fd_printf(2, "pipex: an error occured\n");
-		free_matrix(cmd_name);
-		return (*status);
-	}
-	else if (!full_path && *status == NOT_FOUND)
-	{
-		fd_printf(2, "pipex: command not found: %s\n", cmd_name[0]);
-		free_matrix(cmd_name);
-		return (*status);
-	}
-	return (0);
-}
-*/
 
 char	**cmd_split(char *cmd)
 {
