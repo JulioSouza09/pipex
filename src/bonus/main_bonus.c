@@ -6,7 +6,7 @@
 /*   By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:42:22 by jcesar-s          #+#    #+#             */
-/*   Updated: 2025/09/14 18:43:40 by jcesar-s         ###   ########.fr       */
+/*   Updated: 2025/09/14 20:41:20 by jcesar-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	int	exit_status;
-
+	int		exit_status;
 	t_pipex	*pipex;
 
 	pipex = pipex_init(argc, argv, envp);
