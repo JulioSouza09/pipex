@@ -6,7 +6,7 @@
 /*   By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 17:27:33 by jcesar-s          #+#    #+#             */
-/*   Updated: 2025/09/14 20:46:19 by jcesar-s         ###   ########.fr       */
+/*   Updated: 2025/09/14 23:05:26 by jcesar-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@ typedef struct s_pipex
 	int		fd1;
 	int		fd2;
 	int		cmd_count;
+	int		argv_offset;
 	int		*pids;
 	int		**pipefd;
+	char	*outfile_name;
 	char	**argv;
 	char	**cmd;
 	char	**envp;

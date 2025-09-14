@@ -6,17 +6,15 @@
 /*   By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:42:22 by jcesar-s          #+#    #+#             */
-/*   Updated: 2025/09/12 11:55:14 by jcesar-s         ###   ########.fr       */
+/*   Updated: 2025/09/14 21:40:51 by jcesar-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-#include <sys/wait.h>
 
 int	main(int argc, char **argv, char **envp)
 {
-	int	exit_status;
-
+	int		exit_status;
 	t_pipex	*pipex;
 
 	if (argc != 5)

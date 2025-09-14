@@ -6,7 +6,7 @@
 /*   By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 15:48:44 by jcesar-s          #+#    #+#             */
-/*   Updated: 2025/09/14 17:14:56 by jcesar-s         ###   ########.fr       */
+/*   Updated: 2025/09/14 23:07:46 by jcesar-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,13 @@ int	exec_pipe(t_pipex *pipex, int *r_from, int *w_to)
 void	exec_pipe_chain(t_pipex *p)
 {
 	int	idx;
+	int	argv_offset;
 
 	idx = 0;
 	while (idx < p->cmd_count)
 	{
-		p->cmd = get_cmd(p->argv[idx], p->envp);
+		argv_offset = p->argv_offset;
+		p->cmd = get_cmd(p->argv[idx + argv_offset], p->envp);
 		if (!p->cmd)
 			exit_on_error(p, FALSE);
 		if (idx == 0)

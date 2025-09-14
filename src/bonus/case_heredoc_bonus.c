@@ -6,7 +6,7 @@
 /*   By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 18:43:58 by jcesar-s          #+#    #+#             */
-/*   Updated: 2025/09/14 19:06:07 by jcesar-s         ###   ########.fr       */
+/*   Updated: 2025/09/14 21:08:25 by jcesar-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ char	*line_join(char *l1, char *l2)
 		return (NULL);
 	if (to_free)
 		free(to_free);
+	free(l2);
 	return (result);
 }
 
@@ -69,7 +70,7 @@ int	get_heredoc(char **argv, int *read_end)
 		result = line_join(result, line);
 		if (!result)
 			return (1);
-		free(line);
 	}
-	return (free(limiter), heredoc_to_pipe(result, read_end));
+	free(limiter);
+	return (heredoc_to_pipe(result, read_end));
 }

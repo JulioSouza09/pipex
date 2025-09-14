@@ -6,7 +6,7 @@
 /*   By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 09:35:28 by jcesar-s          #+#    #+#             */
-/*   Updated: 2025/09/14 20:43:38 by jcesar-s         ###   ########.fr       */
+/*   Updated: 2025/09/14 22:30:08 by jcesar-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,9 @@ int	open_correctly(t_pipex *pipex, char *pathname, int flags, mode_t mode)
 	fd = open(pathname, flags, mode);
 	if (fd == -1)
 	{
+		fd_printf(2, "pipex: %s: %s\n", pathname, strerror(errno));
 		if (pipex)
-			free(pipex);
-		fd_printf(2, "pipex: %s: %s\n", strerror(errno), pathname);
-		exit(EXIT_FAILURE);
+			exit_on_error(pipex, FALSE);
 	}
 	return (fd);
 }
@@ -42,7 +41,8 @@ void	exit_on_error(t_pipex *pipex, int print_error)
 {
 	if (print_error)
 		perror("pipex");
-	unlink(pipex->argv[pipex->cmd_count]);
+	if (pipex->outfile_name)
+		unlink(pipex->outfile_name);
 	pipex_destroy(pipex);
 	exit(EXIT_FAILURE);
 }
