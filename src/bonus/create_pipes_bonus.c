@@ -6,13 +6,12 @@
 /*   By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 14:55:25 by jcesar-s          #+#    #+#             */
-/*   Updated: 2025/09/13 19:17:48 by jcesar-s         ###   ########.fr       */
+/*   Updated: 2025/09/14 17:31:01 by jcesar-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-static
 int	*create_pipe(t_pipex *pipex)
 {
 	int	*pipefd;
@@ -21,7 +20,7 @@ int	*create_pipe(t_pipex *pipex)
 	if (!pipefd)
 		return (NULL);
 	if (pipe(pipefd) == -1)
-		exit_on_error(pipex);
+		exit_on_error(pipex, TRUE);
 	return (pipefd);
 }
 

@@ -6,12 +6,11 @@
 /*   By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:42:22 by jcesar-s          #+#    #+#             */
-/*   Updated: 2025/09/13 22:05:36 by jcesar-s         ###   ########.fr       */
+/*   Updated: 2025/09/14 18:43:40 by jcesar-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
-#include <sys/wait.h>
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -22,7 +21,8 @@ int	main(int argc, char **argv, char **envp)
 	pipex = pipex_init(argc, argv, envp);
 	if (!pipex)
 		return (1);
-	exit_status = exec_pipe_chain(pipex);
+	exec_pipe_chain(pipex);
+	exit_status = close_and_wait(pipex);
 	pipex_destroy(pipex);
 	return (exit_status);
 }
