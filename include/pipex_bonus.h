@@ -6,13 +6,13 @@
 /*   By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 17:27:33 by jcesar-s          #+#    #+#             */
-/*   Updated: 2025/09/14 18:51:06 by jcesar-s         ###   ########.fr       */
+/*   Updated: 2025/09/14 20:46:19 by jcesar-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
+#ifndef PIPEX_BONUS_H
 
-# define PIPEX_H
+# define PIPEX_BONUS_H
 # define TRUE 1
 # define FALSE 0
 
@@ -49,7 +49,7 @@ char	**get_cmd(char *cmd, char **envp);
 void	free_matrix(char **matrix);
 void	exit_on_error(t_pipex *pipex, int print_error);
 void	safe_close(int *fd_addr);
-void 	close_unused_pipes(t_pipex *pipex, int needed_read, int needed_write);
+void	close_unused_pipes(t_pipex *pipex, int needed_read, int needed_write);
 int		open_correctly(t_pipex *pipex, char *pathname, int flags, mode_t mode);
 
 /***** Pipex init *****/
@@ -67,6 +67,6 @@ int		*create_pids(t_pipex *pipex);
 void	destroy_pipes(int **to_free, int position);
 
 /***** Case heredoc *****/
-int	get_heredoc(char **argv, int *read_end);
+int		get_heredoc(char **argv, int *read_end);
 
 #endif
