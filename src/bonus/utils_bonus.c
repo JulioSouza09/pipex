@@ -6,7 +6,7 @@
 /*   By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 09:35:28 by jcesar-s          #+#    #+#             */
-/*   Updated: 2025/09/14 22:30:08 by jcesar-s         ###   ########.fr       */
+/*   Updated: 2025/09/15 16:38:47 by jcesar-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	free_matrix(char **matrix)
 {
 	int	i;
 
+	if (!matrix)
+		return ;
 	i = 0;
 	while (matrix[i])
 		free(matrix[i++]);
@@ -23,7 +25,7 @@ void	free_matrix(char **matrix)
 	free(matrix);
 }
 
-int	open_correctly(t_pipex *pipex, char *pathname, int flags, mode_t mode)
+int	open_correctly(char *pathname, int flags, mode_t mode)
 {
 	int	fd;
 
@@ -31,20 +33,19 @@ int	open_correctly(t_pipex *pipex, char *pathname, int flags, mode_t mode)
 	if (fd == -1)
 	{
 		fd_printf(2, "pipex: %s: %s\n", pathname, strerror(errno));
-		if (pipex)
-			exit_on_error(pipex, FALSE);
+		return (-1);
 	}
 	return (fd);
 }
 
-void	exit_on_error(t_pipex *pipex, int print_error)
+void	exit_on_error(t_pipex *pipex, int print_error, int exit_code)
 {
 	if (print_error)
 		perror("pipex");
-	if (pipex->outfile_name)
+	if (pipex->delete_file)
 		unlink(pipex->outfile_name);
 	pipex_destroy(pipex);
-	exit(EXIT_FAILURE);
+	exit(exit_code);
 }
 
 void	safe_close(int *fd_addr)

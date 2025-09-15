@@ -6,7 +6,7 @@
 /*   By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 17:27:33 by jcesar-s          #+#    #+#             */
-/*   Updated: 2025/09/14 23:05:26 by jcesar-s         ###   ########.fr       */
+/*   Updated: 2025/09/15 16:39:14 by jcesar-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ typedef struct s_pipex
 	int		fd2;
 	int		cmd_count;
 	int		argv_offset;
+	int		delete_file;
+	int		is_heredoc;
 	int		*pids;
 	int		**pipefd;
 	char	*outfile_name;
@@ -49,10 +51,10 @@ char	**get_cmd(char *cmd, char **envp);
 
 /***** Utils *****/
 void	free_matrix(char **matrix);
-void	exit_on_error(t_pipex *pipex, int print_error);
+void	exit_on_error(t_pipex *pipex, int print_error, int exit_code);
 void	safe_close(int *fd_addr);
 void	close_unused_pipes(t_pipex *pipex, int needed_read, int needed_write);
-int		open_correctly(t_pipex *pipex, char *pathname, int flags, mode_t mode);
+int		open_correctly(char *pathname, int flags, mode_t mode);
 
 /***** Pipex init *****/
 t_pipex	*pipex_init(int argc, char **argv, char **envp);

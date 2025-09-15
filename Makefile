@@ -6,7 +6,7 @@
 #    By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/31 16:09:59 by jcesar-s          #+#    #+#              #
-#    Updated: 2025/09/14 18:57:52 by jcesar-s         ###   ########.fr        #
+#    Updated: 2025/09/15 18:32:27 by jcesar-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,13 +17,12 @@ IDIR = include/
 ODIR = obj/
 SDIR = src/
 LFTDIR = $(IDIR)libft/
-SRCFILES = main.c cmd_checker.c pipex_init.c utils.c pipes.c
+SRCFILES = main.c cmd_checker.c pipex_init.c utils.c pipes.c create_pipes.c
 SRC = $(patsubst %, $(SDIR)%, $(SRCFILES))
 OBJ = $(patsubst %.c, $(ODIR)%.o, $(SRCFILES))
 DEP = $(IDIR)pipex.h
 LFT = $(LFTDIR)libft.a
 
-BNAME = pipex_bonus
 BSDIR = $(SDIR)bonus/
 BSRCFILES = main_bonus.c cmd_checker_bonus.c pipex_init_bonus.c \
 			utils_bonus.c pipes_bonus.c create_pipes_bonus.c \
@@ -57,14 +56,12 @@ clean:
 fclean: clean
 	@make fclean -C $(LFTDIR) --no-print-directory
 	rm -f $(NAME)
-	rm -f $(BNAME)
 
 re: fclean all
 
-bonus: $(BNAME) $(BOBJ)
-
-$(BNAME): $(LFT) $(BOBJ) 
-	$(CC) $(CFLAGS) $(BOBJ) -o $(BNAME) $(LFT)
+bonus: $(BOBJ) $(LFT)
+	rm -f $(NAME)
+	$(CC) $(CFLAGS) $(BOBJ) -o $(NAME) $(LFT)
 
 $(ODIR)%.o: $(BSDIR)%.c $(DEP)
 	mkdir -p $(ODIR)

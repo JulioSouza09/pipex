@@ -6,7 +6,7 @@
 /*   By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 12:41:33 by jcesar-s          #+#    #+#             */
-/*   Updated: 2025/09/14 23:07:06 by jcesar-s         ###   ########.fr       */
+/*   Updated: 2025/09/15 16:39:53 by jcesar-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,20 @@ void	find_heredoc(t_pipex *pipex, int argc, char **argv)
 
 	if (ft_strcmp(argv[1], "here_doc") != 0)
 	{
-		pipex->fd1 = open_correctly(pipex, argv[1], O_RDONLY, 0);
-		pipex->fd2 = open_correctly(pipex, pipex->outfile_name,
-				O_WRONLY | O_CREAT | O_TRUNC, 0666);
+		pipex->fd1 = open_correctly(argv[1], O_RDONLY, 0);
 		pipex->cmd_count = argc - 3;
 		pipex->argv_offset = 2;
+		pipex->is_heredoc = FALSE;
 		return ;
 	}
 	exit_code = get_heredoc(argv, &pipex->fd1);
 	if (exit_code == -1)
-		exit_on_error(pipex, TRUE);
+		exit_on_error(pipex, TRUE, EXIT_FAILURE);
 	else if (exit_code == 1)
-		exit_on_error(pipex, FALSE);
-	pipex->fd2 = open_correctly(pipex, argv[argc - 1],
-			O_WRONLY | O_CREAT | O_APPEND, 0666);
+		exit_on_error(pipex, FALSE, EXIT_FAILURE);
 	pipex->cmd_count = argc - 4;
 	pipex->argv_offset = 3;
+	pipex->is_heredoc = TRUE;
 }
 
 t_pipex	*pipex_init(int argc, char **argv, char **envp)
@@ -44,6 +42,7 @@ t_pipex	*pipex_init(int argc, char **argv, char **envp)
 	pipex = ft_calloc(1, sizeof(t_pipex));
 	if (!pipex)
 		return (NULL);
+	pipex->delete_file = FALSE;
 	pipex->outfile_name = argv[argc - 1];
 	pipex->argv = argv;
 	find_heredoc(pipex, argc, argv);
@@ -65,6 +64,8 @@ void	pipex_destroy(t_pipex *pipex)
 		safe_close(&pipex->fd1);
 	if (pipex->fd2 > 2)
 		safe_close(&pipex->fd2);
+	if (pipex->cmd)
+		free_matrix(pipex->cmd);
 	if (pipex->pipefd)
 	{
 		close_unused_pipes(pipex, -1, -1);
