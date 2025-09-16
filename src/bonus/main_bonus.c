@@ -6,7 +6,7 @@
 /*   By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 15:42:22 by jcesar-s          #+#    #+#             */
-/*   Updated: 2025/09/15 17:40:07 by jcesar-s         ###   ########.fr       */
+/*   Updated: 2025/09/16 12:00:42 by jcesar-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv, char **envp)
 		fd_printf(2, "pipex: please provide at least 5 arguments.\n", argv[0]);
 		return (3);
 	}
-	if (ft_strcmp(argv[1], "here_doc") == 0 && argc < 6)
+	if (ft_strncmp(argv[1], "here_doc", 8) == 0 && argc < 6)
 	{
 		fd_printf(2, "Usage: %s here_doc LIMITER cmd cmd1 file2\n", argv[0]);
 		return (2);

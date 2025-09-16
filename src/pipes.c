@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipes_bonus.c                                      :+:      :+:    :+:   */
+/*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 15:48:44 by jcesar-s          #+#    #+#             */
-/*   Updated: 2025/09/15 18:05:33 by jcesar-s         ###   ########.fr       */
+/*   Updated: 2025/09/16 12:26:22 by jcesar-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	exec_child(t_pipex *pipex, int *read_from, int *write_to)
 	if (!pipex->cmd)
 		exit_on_error(pipex, FALSE, 127);
 	execve(pipex->cmd[0], pipex->cmd, pipex->envp);
-	perror("pipex");
+	exit_on_error(pipex, FALSE, EXIT_FAILURE);
 }
 
 static

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_bonus.c                                      :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 09:35:28 by jcesar-s          #+#    #+#             */
-/*   Updated: 2025/09/15 18:09:44 by jcesar-s         ###   ########.fr       */
+/*   Updated: 2025/09/16 12:33:48 by jcesar-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	open_correctly(char *pathname, int flags, mode_t mode)
 	fd = open(pathname, flags, mode);
 	if (fd == -1)
 	{
-		fd_printf(2, "pipex: %s: %s\n", pathname, strerror(errno));
+		fd_printf(2, "pipex: %s: %s\n", strerror(errno), pathname);
 		return (-1);
 	}
 	return (fd);
