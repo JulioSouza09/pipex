@@ -6,7 +6,7 @@
 #    By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/31 16:09:59 by jcesar-s          #+#    #+#              #
-#    Updated: 2025/09/15 18:32:27 by jcesar-s         ###   ########.fr        #
+#    Updated: 2025/09/16 17:25:53 by jcesar-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ libclean:
 clean:
 	@make clean -C $(LFTDIR) --no-print-directory
 	rm -rf $(ODIR)
+	rm -f .bonus
 
 fclean: clean
 	@make fclean -C $(LFTDIR) --no-print-directory
@@ -59,12 +60,16 @@ fclean: clean
 
 re: fclean all
 
-bonus: $(BOBJ) $(LFT)
+bonus: .bonus
+
+.bonus: $(BOBJ) $(LFT)
 	rm -f $(NAME)
 	$(CC) $(CFLAGS) $(BOBJ) -o $(NAME) $(LFT)
+	touch .bonus
 
 $(ODIR)%.o: $(BSDIR)%.c $(DEP)
 	mkdir -p $(ODIR)
 	$(CC) $(CFLAGS) -c $< -o $@ -I $(IDIR) -I $(LFTDIR)
+	rm -f .bonus
 
 .PHONY: all clean fclean re bonus

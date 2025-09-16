@@ -6,7 +6,7 @@
 /*   By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 09:59:40 by jcesar-s          #+#    #+#             */
-/*   Updated: 2025/09/15 11:53:54 by jcesar-s         ###   ########.fr       */
+/*   Updated: 2025/09/16 15:59:15 by jcesar-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ char	*get_program_path(char *name, char **split_env)
 	return (handle_error(tmp, name, NOT_FOUND));
 }
 
+static
 char	**cmd_split(char *cmd)
 {
 	char	**result;

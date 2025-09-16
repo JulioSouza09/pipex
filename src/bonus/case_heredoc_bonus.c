@@ -6,7 +6,7 @@
 /*   By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/14 18:43:58 by jcesar-s          #+#    #+#             */
-/*   Updated: 2025/09/15 12:40:45 by jcesar-s         ###   ########.fr       */
+/*   Updated: 2025/09/16 17:19:40 by jcesar-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	get_heredoc(char **argv, int *read_end)
 		ft_printf("pipe heredoc> ");
 		line = get_next_line(STDIN_FILENO);
 		if (!line)
-			return (1);
+			break ;
 		if (ft_strcmp(limiter, line) == 0)
 		{
 			free(line);
