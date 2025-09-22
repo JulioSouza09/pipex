@@ -6,7 +6,7 @@
 /*   By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 09:59:40 by jcesar-s          #+#    #+#             */
-/*   Updated: 2025/09/16 15:58:34 by jcesar-s         ###   ########.fr       */
+/*   Updated: 2025/09/22 14:25:49 by jcesar-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ char	*get_path_env(char **envp)
 	len = ft_strlen(name);
 	while (1)
 	{
+		if (!envp[i])
+			return (NULL);
 		if (ft_strncmp(envp[i], name, len) == 0)
 			return (envp[i] + len);
 		++i;
