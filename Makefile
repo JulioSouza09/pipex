@@ -6,7 +6,7 @@
 #    By: jcesar-s <jcesar-s@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/31 16:09:59 by jcesar-s          #+#    #+#              #
-#    Updated: 2025/09/16 17:25:53 by jcesar-s         ###   ########.fr        #
+#    Updated: 2025/09/22 12:04:14 by jcesar-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,5 @@ bonus: .bonus
 $(ODIR)%.o: $(BSDIR)%.c $(DEP)
 	mkdir -p $(ODIR)
 	$(CC) $(CFLAGS) -c $< -o $@ -I $(IDIR) -I $(LFTDIR)
-	rm -f .bonus
 
 .PHONY: all clean fclean re bonus
