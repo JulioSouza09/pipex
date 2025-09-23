@@ -23,6 +23,8 @@ char	*get_path_env(char **envp)
 	len = ft_strlen(name);
 	while (1)
 	{
+		if (!envp[i])
+			return (NULL);
 		if (ft_strncmp(envp[i], name, len) == 0)
 			return (envp[i] + len);
 		++i;

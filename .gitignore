@@ -3,3 +3,5 @@ obj/*
 pipex
 outfile
 pipex_bonus
+compile_commands.json
+.cache/*

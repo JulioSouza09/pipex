@@ -63,4 +63,8 @@ void	close_unused_pipes(t_pipex *pipex, int needed_read, int needed_write)
 		safe_close(&pipex->pipefd[0]);
 	if (pipex->pipefd[1] != needed_write)
 		safe_close(&pipex->pipefd[1]);
+	if (needed_read != pipex->fd1)
+		safe_close(&pipex->fd1);
+	if (needed_write != pipex->fd2)
+		safe_close(&pipex->fd2);
 }
